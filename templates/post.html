@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{ post.title }}</h1>
+  <small>{{ post.date }}</small>
+  <div class="post-content">{{ post.html_content | safe }}</div>
+{% endblock %}
