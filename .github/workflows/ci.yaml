@@ -1,0 +1,63 @@
+name: Python CI
+
+on:
+  push:
+    branches:  # Runs on ALL branches
+      - '**'
+  pull_request:
+    branches: [ main ]  # Trigger on PRs targeting `main`
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install linting tools
+      run: pip install flake8 pylint
+
+    - name: Run flake8
+      run: flake8 generator.py server.py --count --show-source --statistics
+
+    - name: Run pylint
+      run: pylint generator.py server.py
+
+  build-test:
+    runs-on: ubuntu-latest
+    needs: lint  # Run only if linting succeeds
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install markdown jinja2
+
+    - name: Validate directory structure
+      run: |
+        mkdir -p content templates static
+        # Create minimal templates if missing
+        if [ ! -f templates/base.html ]; then
+          echo '<!DOCTYPE html>{% block content %}{% endblock %}' > templates/base.html
+        fi
+        if [ ! -f templates/index.html ]; then
+          echo '{% extends "base.html" %}{% block content %}{% endblock %}' > templates/index.html
+        fi
+        if [ ! -f templates/post.html ]; then
+          echo '{% extends "base.html" %}{% block content %}{% endblock %}' > templates/post.html
+        fi
+
+    - name: Test site build
+      run: |
+        echo "## Test Post" > content/test-post.md
+        python generator.py  # Verify build completes without errors
