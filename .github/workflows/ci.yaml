@@ -22,11 +22,8 @@ jobs:
     - name: Install linting tools
       run: pip install flake8 pylint
 
-    - name: Run flake8
-      run: flake8 generator.py server.py --count --show-source --statistics
-
-    - name: Run pylint
-      run: pylint generator.py server.py
+    - name: Run lint checks
+      run: make lint
 
   build-test:
     runs-on: ubuntu-latest
