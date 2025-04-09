@@ -30,17 +30,17 @@ def parse_markdown(file_path: str) -> dict:
     # Extract front matter metadata if present
     meta = {}
     front_matter_match = re.match(r'^---\n(.*?)\n---\n', content, re.DOTALL)
-    
+
     if front_matter_match:
         front_matter = front_matter_match.group(1)
         content = content[front_matter_match.end():]
-        
+
         # Parse front matter
         for line in front_matter.split('\n'):
             if ':' in line:
                 key, value = line.split(':', 1)
                 meta[key.strip().lower()] = value.strip().strip('"\'')
-    
+
     # Extract metadata
     filename = os.path.basename(file_path)
     slug, _ = os.path.splitext(filename)
@@ -61,12 +61,12 @@ def parse_markdown(file_path: str) -> dict:
 
     # Use front matter title or generate from filename
     title = meta.get('title', slug.replace("-", " ").title())
-    
+
     # Extract tags or use default
     tags = []
     if 'tags' in meta:
         tags = [tag.strip() for tag in meta['tags'].split(',')]
-    
+
     return {
         "title": title,
         "date": meta.get('date', date),
@@ -106,10 +106,10 @@ def generate_site():
 
     # Sort posts by date
     posts_sorted = sorted(posts, key=lambda x: x["date"], reverse=True)
-    
+
     # Get recent posts for the homepage
     recent_posts = posts_sorted[:RECENT_POSTS_COUNT]
-    
+
     # Organize posts by tags
     tags_dict = {}
     for post in posts_sorted:
@@ -123,7 +123,7 @@ def generate_site():
                 if tag not in tags_dict:
                     tags_dict[tag] = []
                 tags_dict[tag].append(post)
-    
+
     # Generate tag-specific pages
     tag_template = env.get_template("tag.html")
     for tag, tag_posts in tags_dict.items():
@@ -135,11 +135,11 @@ def generate_site():
         tag_path = os.path.join(tags_output_dir, f"{tag}.html")
         with open(tag_path, "w", encoding="utf-8") as f:
             f.write(tag_html)
-    
+
     # Generate index page with tags and recent posts
     template = env.get_template("index.html")
     index_html = template.render(
-        tags_dict=tags_dict, 
+        tags_dict=tags_dict,
         recent_posts=recent_posts
     )
 
