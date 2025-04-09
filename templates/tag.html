@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ tag_title }}{% endblock %}
+{% block content %}
+  <div class="tag-header">
+    <h1><span class="hashtag-title">#{{ tag_title }}</span> Posts</h1>
+    <a href="/" class="back-link">← Back to all topics</a>
+  </div>
+
+  <ol class="posts-list">
+    {% for post in posts %}
+      <li>
+        <div class="post-entry">
+          <a href="/{{ post.slug }}.html">{{ post.title }}</a>
+          <small>({{ post.date }})</small>
+          {% if post.tags %}
+            <span class="inline-tags">
+              {% for ptag in post.tags %}
+                <a href="/tags/{{ ptag }}.html" class="hashtag-mini">#{{ ptag }}</a>
+              {% endfor %}
+            </span>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+{% endblock %}
