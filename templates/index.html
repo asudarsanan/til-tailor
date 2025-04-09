@@ -1,12 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Today I Learned</h1>
-  <ul>
-    {% for post in posts %}
-      <li>
-        <a href="{{ post.slug }}.html">{{ post.title }}</a>
-        <small>({{ post.date }})</small>
-      </li>
-    {% endfor %}
-  </ul>
+  <h1>Aasish Sudarsanan's TILs</h1>
+  
+  <div class="topics-container">
+    <h2>TILs by topics</h2>
+    <div class="hashtag-cloud">
+      {% for tag, posts in tags_dict.items() %}
+        <a href="/tags/{{ tag }}.html" class="hashtag-link">
+          #{{ tag }}({{ posts|length }})
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="recent-posts">
+    <h2>Recent TILs</h2>
+    <ol class="recent-list">
+      {% for post in recent_posts %}
+        <li>
+          <div class="post-entry">
+            <a href="/{{ post.slug }}.html">{{ post.title }}</a>
+            <small>({{ post.date }})</small>
+            {% if post.tags %}
+              <span class="inline-tags">
+                {% for tag in post.tags %}
+                  <a href="/tags/{{ tag }}.html" class="hashtag-mini">#{{ tag }}</a>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
 {% endblock %}

@@ -1,170 +1,252 @@
-/* TIL-Tailor minimalist theme */
+/* TIL Website Minimalist Theme */
 
 body {
-    font-family: "Helvetica", sans-serif;
-    hyphens: auto;
-    margin: auto;
-    padding: 1em;
-    max-width: 75em; /* Wide format */
-    background-color: #F6F6F6;
-}
-
-/* Content styling */
-.content {
-    background-color: white;
-    padding: 2.5em 3.5em;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
-    position: relative;
-    min-height: auto; /* Changed from fixed min-height to auto */
-    aspect-ratio: unset; /* Removed fixed aspect ratio */
-    margin: 0 auto 2em; /* Added bottom margin for spacing */
-    max-width: 100%;
-    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    color: #333;
+    background-color: #fff;
 }
 
 /* Navigation */
 nav {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
 nav a {
-    color: blue;
+    color: #0000EE;
     text-decoration: none;
-    margin-right: 2em;
+    margin-right: 1.5rem;
+    padding: 0.2rem 0.4rem;
+    transition: all 0.2s ease;
+    border-radius: 2px; /* Sharper edges */
 }
 
 nav a:hover {
-    color: #F6F6F6;
-    background-color: #0000FF;
+    background-color: #0000EE;
+    color: white;
+    text-decoration: none;
 }
 
-.top-link {
-    margin-right: 2em;
+/* Blue highlight for current page */
+.current-page {
+    background-color: #0000EE;
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px; /* Sharper edges */
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
-    line-height: 1.3;
-    color: #333;
+h1, h2, h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: #000;
 }
 
 h1 {
-    margin-bottom: 0px;
-    text-wrap: balance;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
-h1.til-title {
-    margin-bottom: 0px;
-    text-wrap: balance;
+/* Main sections */
+.page-section {
+    margin-bottom: 2rem;
 }
 
-h2 {
-    margin-top: 30px;
-    margin-bottom: 15px;
+/* Tag buttons */
+.tag-button {
+    display: inline-block;
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    border-radius: 4px; /* Sharper edges compared to 15px */
+    padding: 0.2rem 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.2s ease;
 }
 
-/* Post metadata */
-small {
-    display: block;
-    margin-bottom: 30px;
-    font-style: italic;
+.tag-button:hover {
+    background-color: #0000EE;
+    color: white;
+    text-decoration: none;
+}
+
+/* Sort controls */
+.sort-control {
+    margin-bottom: 1rem;
+}
+
+.sort-button {
+    background-color: #90EE90; /* Light green */
+    border: 1px solid #999;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: all 0.2s ease;
+    border-radius: 2px; /* Sharper edges */
+}
+
+.sort-button:hover {
+    background-color: #0000EE;
+    color: white;
+}
+
+/* Topic tag styling with sharper edges */
+.topic-tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    border-radius: 4px; /* Sharper edges compared to 15px */
+    padding: 0.2rem 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #000;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.topic-tag:hover {
+    background-color: #0000EE;
+    color: white;
+    text-decoration: none;
+}
+
+/* Recent TILs section */
+.recent-tils {
+    margin-top: 2rem;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 3px; /* Sharper edges */
+}
+
+.til-entry {
+    margin-bottom: 1.5rem;
+}
+
+.til-title {
+    color: #0000EE;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px; /* Sharper edges */
+    transition: all 0.2s ease;
+}
+
+.til-title:hover {
+    background-color: #0000EE;
+    color: white;
+    text-decoration: none;
 }
 
 .til-date {
-    font-style: italic;
+    color: #333;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
 }
 
-/* Post header and subheader */
-header.til-header,
-div.til-subheader {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-}
-
-/* Post content */
-.post-content {
-    margin-top: 20px;
-}
-
-.post-content p {
-    margin-bottom: 20px;
-}
-
-/* Lists */
-ul {
-    padding-left: 20px;
-}
-
-ul li {
-    margin-bottom: 10px;
-}
-
-/* Topic lists */
-ul.topic-list {
-    list-style: none;
-    list-style-type: none;
-    padding: 0;
-}
-
-li.topic-list-tag {
+/* Tag pills for posts with sharper edges */
+.post-tag {
     display: inline-block;
-    margin-right: 0.25em;
-    margin-top: 0.25em;
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    border-radius: 4px; /* Sharper edges compared to 15px */
+    padding: 0.2rem 0.8rem;
+    margin-right: 0.3rem;
+    font-size: 0.8rem;
+    color: #000;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
-/* Code blocks */
-pre, code {
-    font-family: monospace;
-    background-color: #f9f9f9;
-    border: 1px solid black;
-    padding: 15px;
-    font-size: 14px;
-    overflow: scroll;
+.post-tag:hover {
+    background-color: #0000EE;
+    color: white;
+    text-decoration: none;
 }
 
-/* Blockquotes */
-blockquote {
-    background: #f9f9f9;
-    border-left: 10px solid #ccc;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
+/* Specific tag styles */
+.github-actions {
+    background-color: #f0f0f0;
+}
+
+.security-tag {
+    background-color: #f0f0f0;
+}
+
+.python-tag {
+    background-color: #f0f0f0;
+}
+
+.web-tag {
+    background-color: #f0f0f0;
 }
 
 /* Links */
 a {
-    color: blue;
-    background-color: transparent;
+    color: #0000EE;
     text-decoration: none;
+    padding: 0.1rem 0.2rem;
+    border-radius: 2px; /* Sharper edges */
+    transition: all 0.2s ease;
 }
 
 a:hover {
-    color: #F6F6F6;
-    background-color: #0000FF;
+    background-color: #0000EE;
+    color: white;
+    text-decoration: none;
 }
 
-/* Tag styling */
-a.til-tag {
-    background-color: lightgray;
-    font-size: small;
-    border: 1px ridge blue;
-    border-radius: 15px;
-    padding: 5px 10px;
+/* Main content */
+.main-content {
+    margin-top: 2rem;
+}
+
+/* Sort options */
+.sort-option {
     display: inline-block;
+    margin-right: 0.5rem;
 }
 
-a:hover.til-tag {
-    background-color: darkblue;
+/* Footer */
+footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+    color: #666;
 }
 
-/* Buttons */
-button.sort {
-    background-color: lightgreen;
+/* Topic list */
+.topic-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
 }
 
-/* Horizontal rule */
-hr {
-    margin: auto;
-    border: 1px dashed gray;
+/* Count badges */
+.count-badge {
+    margin-left: 0.3rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+    
+    .topic-tag, .post-tag {
+        margin-bottom: 0.5rem;
+    }
+    
+    .til-date {
+        display: block;
+        margin-left: 0;
+    }
 }

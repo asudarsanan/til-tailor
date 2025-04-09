@@ -15,9 +15,9 @@ class Handler(SimpleHTTPRequestHandler):
 def run_server():
     """Run the development server."""
     subprocess.run(["python", "generator.py"], check=True)
-    server_address = ("", 8000)
+    server_address = ("", 8080)
     with HTTPServer(server_address, Handler) as httpd:
-        print("Serving at http://localhost:8000")
+        print("Serving at http://localhost:8080")
         httpd.serve_forever()
 
 
