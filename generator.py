@@ -130,12 +130,11 @@ def render_index(posts, tags_dict):
     """Render the index page with custom title."""
     # Sort posts by date for recent posts section
     recent_posts = sorted(posts, key=lambda x: x["date"], reverse=True)[:10]
-    
     # Pass a custom title for the index page
     index_template = env.get_template("index.html")
     return index_template.render(
-        recent_posts=recent_posts, 
-        tags_dict=tags_dict, 
+        recent_posts=recent_posts,
+        tags_dict=tags_dict,
         title="Home"
     )
 
@@ -166,7 +165,6 @@ def generate_site():
 
     # Sort and organize posts
     posts_sorted = sorted(posts, key=lambda x: x["date"], reverse=True)
-    recent_posts = posts_sorted[:RECENT_POSTS_COUNT]
     tags_dict = organize_posts_by_tags(posts_sorted)
 
     # Generate tag pages
