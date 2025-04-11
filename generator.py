@@ -89,7 +89,7 @@ def parse_markdown(file_path: str) -> dict:
 def generate_post_page(post, output_dir):
     """Generate a single post page."""
     template = env.get_template("post.html")
-    output_html = template.render(post=post)
+    output_html = template.render(post=post, title=post["title"])
     output_path = os.path.join(output_dir, f"{post['slug']}.html")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(output_html)
@@ -102,7 +102,8 @@ def generate_tag_pages(tags_dict, tags_output_dir):
         tag_html = tag_template.render(
             tag=tag,
             tag_title=tag.title(),
-            posts=tag_posts
+            posts=tag_posts,
+            title=f"Tag: {tag}"
         )
         tag_path = os.path.join(tags_output_dir, f"{tag}.html")
         with open(tag_path, "w", encoding="utf-8") as f:
@@ -124,6 +125,19 @@ def organize_posts_by_tags(posts):
                     tags_dict[tag] = []
                 tags_dict[tag].append(post)
     return tags_dict
+
+
+def render_index(posts, tags_dict):
+    """Render the index page with custom title."""
+    # Sort posts by date for recent posts section
+    recent_posts = sorted(posts, key=lambda x: x["date"], reverse=True)[:10]
+    # Pass a custom title for the index page
+    index_template = env.get_template("index.html")
+    return index_template.render(
+        recent_posts=recent_posts,
+        tags_dict=tags_dict,
+        title="Home"
+    )
 
 
 def generate_site():
@@ -153,18 +167,12 @@ def generate_site():
 
     # Sort and organize posts
     posts_sorted = sorted(posts, key=lambda x: x["date"], reverse=True)
-    recent_posts = posts_sorted[:RECENT_POSTS_COUNT]
     tags_dict = organize_posts_by_tags(posts_sorted)
 
     # Generate tag pages
     generate_tag_pages(tags_dict, tags_output_dir)
 
-    # Generate index page
-    index_template = env.get_template("index.html")
-    index_html = index_template.render(
-        tags_dict=tags_dict,
-        recent_posts=recent_posts
-    )
+    index_html = render_index(posts_sorted, tags_dict)
 
     output_index = os.path.join(OUTPUT_DIR, "index.html")
     with open(output_index, "w", encoding="utf-8") as f:
