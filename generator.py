@@ -126,7 +126,6 @@ def organize_posts_by_tags(posts):
                 tags_dict[tag].append(post)
     return tags_dict
 
-
 def render_index(posts, tags_dict):
     """Render the index page with custom title."""
     # Sort posts by date for recent posts section
@@ -139,7 +138,6 @@ def render_index(posts, tags_dict):
         tags_dict=tags_dict, 
         title="Home"
     )
-
 
 def generate_site():
     """Generate static site from Markdown content."""
@@ -174,7 +172,6 @@ def generate_site():
     # Generate tag pages
     generate_tag_pages(tags_dict, tags_output_dir)
 
-    # Generate index page
     index_html = render_index(posts_sorted, tags_dict)
 
     output_index = os.path.join(OUTPUT_DIR, "index.html")
